@@ -1,4 +1,6 @@
-# LEX Crafting
+![Showcase](https://i.ibb.co/Xrz2c4zr/grafik.png)  ![Showcase2](https://i.ibb.co/JjrGyZLz/grafik.png)
+
+
 
 Modernes **ESX Crafting-System** für FiveM mit React-NUI, integriertem **Ingame-Creator** und **MySQL-basierter Konfiguration**. Rezepte, Crafting Points, Blips, Jobs und Kategorien lassen sich ohne Config-Dateien verwalten.
 
