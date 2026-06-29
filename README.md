@@ -1,42 +1,40 @@
 ![Showcase](https://i.ibb.co/Xrz2c4zr/grafik.png)  ![Showcase2](https://i.ibb.co/JjrGyZLz/grafik.png)
 
-
-
-Modernes **ESX Crafting-System** für FiveM mit React-NUI, integriertem **Ingame-Creator** und **MySQL-basierter Konfiguration**. Rezepte, Crafting Points, Blips, Jobs und Kategorien lassen sich ohne Config-Dateien verwalten.
+Modern **ESX crafting system** for FiveM with React NUI, built-in **in-game creator**, and **MySQL-based configuration**. Manage recipes, crafting points, blips, jobs, and categories without editing config files.
 
 ---
 
 ## Features
 
-### Crafting (Spieler)
-- Crafting-UI mit Kategorien, Zutaten-Anzeige und Warteschlange
-- Crafting Points als **Marker**, **Ped** oder **Objekt**
-- Job- und Rang-Beschränkungen (pro Point und pro Rezept)
-- Integration mit **ox_inventory** (Material-Check & Item-Abgabe)
-- Erfolgsrate, Craft-Zeit und Yield pro Rezept
-- Abholen fertiger Items aus der Queue
+### Crafting (Players)
+- Crafting UI with categories, ingredient display, and queue
+- Crafting points as **marker**, **ped**, or **object**
+- Job and grade restrictions (per point and per recipe)
+- **ox_inventory** integration (material checks and item delivery)
+- Success rate, craft time, and yield per recipe
+- Collect finished items from the queue
 
 ### Creator (Admin)
-- Ingame-Editor für Rezepte, Points und Einstellungen
-- Blip-Konfiguration (Sprite, Farbe, Skalierung, **eigener Name**)
-- Marker-, Koordinaten- und Interaktions-Radius
-- Kategorien mit Rezept-Zuordnung pro Point
-- **Teleport zum Point** zum schnellen Positionieren
-- Speichern direkt in die Datenbank (Batch-Insert, Partial-Save)
+- In-game editor for recipes, points, and settings
+- Blip configuration (sprite, color, scale, **custom name**)
+- Marker, coordinate, and interaction radius
+- Categories with recipe assignment per point
+- **Teleport to point** for quick positioning
+- Save directly to the database (batch insert, partial save)
 
-### Technik
+### Technical
 - **ESX Legacy** + **oxmysql** + **ox_inventory**
-- React 18 / Vite UI (mitgeliefert unter `ui/`)
-- SQL-Schema inkl. Legacy-Import-Skript
-- Deutsch & Englisch (Locales)
+- React 18 / Vite UI (bundled under `ui/`)
+- SQL schema including legacy import script
+- German and English locales
 
 ---
 
-## Abhängigkeiten
+## Dependencies
 
-| Pflicht | Optional |
-|---------|----------|
-| es_extended (ESX Legacy) | ox_lib (Notifications) |
+| Required | Optional |
+|----------|----------|
+| es_extended (ESX Legacy) | ox_lib (notifications) |
 | oxmysql | |
 | ox_inventory | |
 | MySQL / MariaDB | |
@@ -47,17 +45,17 @@ Details: [DEPENDENCIES.md](./DEPENDENCIES.md)
 
 ## Installation
 
-### 1. Resource einbinden
+### 1. Add the resource
 
 ```cfg
 ensure oxmysql
 ensure es_extended
 ensure ox_inventory
 
-ensure soh_crafting
+ensure lex_crafting
 ```
 
-### 2. Datenbank importieren
+### 2. Import the database
 
 ```sql
 source sql/install.sql
@@ -70,48 +68,44 @@ source sql/import_basics.sql
 source sql/import_legacy.sql
 ```
 
-### 3. Konfiguration
+If you are upgrading from the old `soh_crafting` tables:
 
-In `shared/config.lua` anpassen:
+```sql
+source sql/migrate_soh_to_lex.sql
+```
 
-- `Config.AdminGroups` – wer den Creator nutzen darf
-- `Config.CreatorCommand` – Standard: `craftingcreator`
-- `Config.Locale` – `de` oder `en`
-- `Config.AllowCreatorForAll` – nur für Tests (`false` in Production)
+### 3. Configuration
 
----
+Edit `shared/config.lua`:
 
-## Befehle & Tasten
-
-| Aktion | Befehl / Taste |
-|--------|----------------|
-| Creator öffnen | `/craftingcreator` oder **F7** |
-| Crafting Point nutzen | **E** am Point (Standard) |
+- `Config.AdminGroups` – who can use the creator
+- `Config.CreatorCommand` – default: `craftingcreator`
+- `Config.Locale` – `de` or `en`
+- `Config.AllowCreatorForAll` – testing only (`false` in production)
 
 ---
 
-## Projektstruktur
+## Commands & Keys
+
+| Action | Command / Key |
+|--------|---------------|
+| Open creator | `/craftingcreator` or **F7** |
+| Use crafting point | **E** at the point (default) |
+
+---
+
+## Project Structure
 
 ```
-soh_crafting/
-├── client/          # Points, NUI, Bootstrap
-├── server/          # DB, Crafting, Config-Store
+lex_crafting/
+├── client/          # Points, NUI, bootstrap
+├── server/          # DB, crafting, config store
 ├── shared/          # Config
 ├── locales/         # de / en
-├── sql/             # install.sql, import_legacy.sql             
-└── ui/             # UI
+└── ui/             # UI 
 ```
-
-### UI neu bauen (Entwickler)
-
-```bash
-cd web
-npm install
-npm run build
-```
-
 ---
 
-## Lizenz
+## License
 
-Nutze diese Resource auf eigenes Risiko. Beachte die Lizenzen von ESX, oxmysql, ox_inventory und weiteren Abhängigkeiten.
+Use this resource at your own risk. Respect the licenses of ESX, oxmysql, ox_inventory, and other dependencies.
