@@ -61,18 +61,6 @@ ensure lex_crafting
 source sql/install.sql
 ```
 
-Optional:
-
-```sql
-source sql/import_basics.sql
-source sql/import_legacy.sql
-```
-
-If you are upgrading from the old `soh_crafting` tables:
-
-```sql
-source sql/migrate_soh_to_lex.sql
-```
 
 ### 3. Configuration
 
